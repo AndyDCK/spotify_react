@@ -22,6 +22,9 @@ const Sidebar: React.FC<SidebarProps> = ({
 }) => {
     const pathname = usePathname();
     const player = usePlayer();
+    
+
+    // @ts-ignore
 
 
     const routes = useMemo(() => [
@@ -75,6 +78,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                     ))}
                 </div>
             </Box>
+            {/* @ts-ignore */}
             <Box className="overflow-y-auto h-full">
                 <Library songs={songs}/>
             </Box>
