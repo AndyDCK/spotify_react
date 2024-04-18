@@ -5,6 +5,8 @@ interface BoxProps {
     children: React.ReactNode
 }
 
+//@ts-ignore
+
 const Box: React.FC<BoxProps> = ({children, className}) => {
   return (
     <div
