@@ -39,6 +39,14 @@ const Header: React.FC<HeaderProps>= ({children, className}) => {
         }
     };
 
+    const redirectToHome = () => {
+        router.push('/');
+    };
+
+    const redirectToSearch = () => {
+        router.push('/search');
+    };
+
 
   return (
     <div 
@@ -105,7 +113,9 @@ const Header: React.FC<HeaderProps>= ({children, className}) => {
                                 justify-center
                                 hover:opacity-75
                                 transition
-                            '>
+                            '
+                            onClick={redirectToHome}
+                            >
                                 <HiHome className='text-black' size={20} />
                         </button>
                         <button 
@@ -118,7 +128,9 @@ const Header: React.FC<HeaderProps>= ({children, className}) => {
                                 justify-center
                                 hover:opacity-75
                                 transition
-                            '>
+                            '
+                            onClick={redirectToSearch}
+                            >
                                 <BiSearch className='text-black' size={20} />
                         </button>
                     </div>
