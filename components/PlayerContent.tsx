@@ -5,6 +5,7 @@ import LikeButton from "./LikeButton";
 import MediaItem from "./MediaItem";
 import Slider from "./Slider";
 import usePlayer from "@/hooks/usePlayer";
+// @ts-ignore
 import useSound from "use-sound";
 
 import { BsPauseFill, BsPlayFill } from "react-icons/bs";
