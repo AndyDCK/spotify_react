@@ -28,6 +28,7 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
 
     const Icon = isPlaying ? BsPauseFill : BsPlayFill;
     const VolumeIcon = volume === 0 ? HiSpeakerXMark : HiSpeakerWave;
+    
 
 
     const onPlayNext = () => {
@@ -101,7 +102,7 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
     };
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 h-full">
+    <div className="grid grid-cols-3 md:grid-cols-3 h-full">
         <div className="
             flex
             w-full
@@ -119,9 +120,23 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
                 md:hidden
                 col-auto
                 w-full
-                justify-end
+                justify-center
                 items-center
+                gap-x-6
+
         ">
+            <div>
+                <AiFillStepBackward
+                    onClick={onPlayPrevious}
+                    size={30} 
+                    className="
+                        text-neutral-400 
+                        cursor-pointer 
+                        hover:text-white 
+                        transition
+                    "
+                />
+            </div>
             <div
                 onClick={handlePlay}
                 className="
@@ -137,6 +152,18 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
                 "
             >
                 <Icon size={30} className="text-black"/>
+            </div>
+            <div>
+                <AiFillStepForward 
+                    onClick={onPlayNext}
+                    size={30}
+                    className="
+                        text-neutral-400 
+                        cursor-pointer 
+                        hover:text-white 
+                        transition
+                    "
+                />
             </div>
         </div>
 
