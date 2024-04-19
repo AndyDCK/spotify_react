@@ -13,6 +13,9 @@ import { useUser } from "@/hooks/useUser";
 import { FaUserAlt } from 'react-icons/fa';
 import { toast } from 'react-hot-toast';
 import usePlayer from '@/hooks/usePlayer';
+import { AiOutlinePlus } from 'react-icons/ai';
+import useSubscribeModal from '@/hooks/useSubscribeModal';
+import useUploadModal from '@/hooks/useUploadModal';
 
 interface HeaderProps {
     children: React.ReactNode;
@@ -23,9 +26,11 @@ const Header: React.FC<HeaderProps>= ({children, className}) => {
     const player = usePlayer();
     const authModal = useAuthModal();
     const router = useRouter();
+    const subscribeModal = useSubscribeModal();
+    const uploadModal = useUploadModal();
 
     const supabaseClient = useSupabaseClient();
-    const { user } = useUser();
+    const { user, subscription } = useUser();
 
     const handleLogout = async () => {
         const { error } = await supabaseClient.auth.signOut();
@@ -38,6 +43,20 @@ const Header: React.FC<HeaderProps>= ({children, className}) => {
             toast.success('Logged out successfully')
         }
     };
+
+    const onClick = () => {
+        if (!user) {
+            return authModal.onOpen();
+        }
+        
+        
+        if (!subscription) {
+            return subscribeModal.onOpen();
+        }
+
+
+        return uploadModal.onOpen();
+    }
 
     const redirectToHome = () => {
         router.push('/');
@@ -132,6 +151,21 @@ const Header: React.FC<HeaderProps>= ({children, className}) => {
                             onClick={redirectToSearch}
                             >
                                 <BiSearch className='text-black' size={20} />
+                        </button>
+                        <button
+                            className='
+                                rounded-full
+                                p-2
+                                bg-white
+                                flex
+                                items-center
+                                justify-center
+                                hover:opacity-75
+                                transition
+                            '
+                            onClick={onClick}
+                        >
+                            <AiOutlinePlus className='text-black' size={20}/>
                         </button>
                     </div>
                     <div
