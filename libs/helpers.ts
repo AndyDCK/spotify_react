@@ -1,9 +1,17 @@
 import { Price } from '../types';
 
-// Définition de l'URL de base en dur
-const baseURL = "https://www.monspotify.eu";
+export const getURL = () => {
+    let url =
+        process.env.NEXT_PUBLIC_SITE_URL ??
+        process.env.NEXT_PUBLIC_VERCEL_URL ??
+        'http://localhost:3000/';
 
-// Fonction pour effectuer une requête POST avec l'URL en dur
+    url = url.includes('http') ? url : `https://${url}`;
+    url = url.charAt(url.length - 1) === '/' ? url : `${url}/`;
+
+    return url;
+};
+
 export const postData = async ({
     url,
     data
@@ -11,12 +19,9 @@ export const postData = async ({
     url: string;
     data?: { price: Price }
 }) => {
-    // Concaténation de l'URL de base avec l'URL spécifiée
-    const fullURL = baseURL + url;
-    
-    console.log('POST REQUEST: ', fullURL, data);
+    console.log('POST REQUEST: ', url, data);
 
-    const res = await fetch(fullURL, {
+    const res = await fetch(url, {
         method: 'POST',
         headers: new Headers({ 'Content-Type': 'application/json' }),
         credentials: 'same-origin',
@@ -24,10 +29,17 @@ export const postData = async ({
     });
 
     if (!res.ok) {
-        console.log('Error in POST', { url: fullURL, data, res });
+        console.log('Error in POST', { url, data, res });
 
         throw new Error(res.statusText);
     }
 
     return res.json();
 };
+
+export const toDateTime = (secs: number) => {
+    const t = new Date('1970-01-01T00:30:00Z');
+    t.setSeconds(secs);
+
+    return t;
+}

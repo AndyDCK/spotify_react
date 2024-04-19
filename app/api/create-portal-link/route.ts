@@ -25,8 +25,8 @@ export async function POST() {
 
         const { url } = await stripe.billingPortal.sessions.create({
             customer,
-            return_url: `${getURL()}/account`
-        });
+            return_url: `https://www.monspotify.eu/account`
+        });        
 
         return NextResponse.json({ url });
     } catch (error: any) {
