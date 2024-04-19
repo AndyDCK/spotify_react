@@ -31,13 +31,13 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={font.className}>
-        <SpeedInsights />
         <ToasterProvider />
         <SupabaseProvider>
           <UserProvider>
             <ModalProvider products={products}/>
             <Sidebar songs={userSongs}>
               {children}
+              <SpeedInsights />
             </Sidebar>
             <Player />
           </UserProvider>
